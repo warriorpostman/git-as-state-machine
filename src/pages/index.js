@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
+import GitMachine from '../components/GitMachine';
 
 import Layout from "../components/layout"
 import Image from "../components/image"
@@ -28,15 +29,7 @@ const IndexPage = () => (
       -> [git reset --hard HEAD~1] -> [goes all the way back to no local changes]
 
     </div>
-    <div>
-      The states
-      <ul>
-        <li>no local changes</li>
-        <li>changes unstaged</li>
-        <li>changes staged for commit</li>
-        <li>committed</li>
-      </ul>
-    </div>
+    <GitMachine />
   </Layout>
 )
 
