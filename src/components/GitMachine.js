@@ -1,63 +1,64 @@
-import React, { useHook } from "react"
+import React from "react"
+import { useMachine } from '@xstate/react'
+import { Machine } from 'xstate'
 
-import { createMachine, interpret } from 'xstate'
-
-const GitMachine = () => {
-  // Stateless machine definition
-// machine.transition(...) is a pure function used by the interpreter.
-  const machine = createMachine({
+  const machine = Machine({
     id: 'git',
-    initial: 'NO_CHANGES',
+    initial: 'no_changes',
     states: {
-      NO_CHANGES: { 
-        on: { 
-          CHANGE_FILE: 'UNSTAGED', // eg. cat "Hello" > new_file.txt
-          UNDO_FILE_CHANGE: 'NO_CHANGES' // eg. with an editor
+      no_changes: { 
+        on: {
+          CHANGE_FILE: 'unstaged', // eg. cat "Hello" > new_file.txt
         } 
       },
-      UNSTAGED: { 
+      unstaged: { 
         on: { 
-          STAGE_CHANGE: 'STAGED', // eg. git add .
-          CHECKOUT_CHANGE: 'NO_CHANGES' // eg. git checkout .
+          STAGE_CHANGE: 'staged', // eg. git add .
+          CHECKOUT_CHANGE: 'no_changes', // eg. git checkout .
+          UNDO_FILE_CHANGE: 'no_changes' // eg. with an editor
         }
       },
-      STAGED: { 
+      staged: { 
         on: { 
-          COMMIT_CHANGE: 'COMMITTED', // eg. git commit
-          RESET_CHANGE: 'UNSTAGED' // git reset .
+          COMMIT_CHANGE: 'committed', // eg. git commit
+          RESET: 'unstaged' // git reset .
         },
       },
-      COMMITTED: { on: { 
-          RESET_SOFT: 'UNSTAGED', // eg. git reset HEAD~1
-          RESET_HARD: 'NO_CHANGES', // eg. git reset --hard HEAD~1
+      committed: { on: { 
+          RESET_SOFT: 'unstaged', // eg. git reset HEAD~1
+          RESET_HARD: 'no_changes', // eg. git reset --hard HEAD~1
         },
       }
     }
   });
-  const service = interpret(machine)
-    .onTransition((state) => console.log(state.event, ', thus...', state.value))
-    .start();
 
-  service.send('STAGE_CHANGE');
-  service.send('CHANGE_FILE');
-  service.send('STAGE_CHANGE');
-  service.send('COMMIT_CHANGE');
-  service.send('STAGE_CHANGE');
-  service.send('RESET_SOFT');
-  // console.log('current:', service.send('STAGE_CHANGE'));
-  // console.log('current:', service.send('CHANGE_FILE'));
-  // console.log('current:', service.send('STAGE_CHANGE'));
+const GitMachine = () => {
+
+  const [gitState, send] = useMachine(machine);
+
+  const transition = (ACTION) => { 
+    console.log("ACTION: ", ACTION)
+    // Aksshually, newState is like...the old state? Not sure why it works that way.
+    const newState = send(ACTION);
+    // console.log("new state: ", newState.value);
+    console.log("git state?:", gitState.value);
+  };
 
   return (
     <div>
       <h2>Welcome to...Machine</h2>
       <div>
+        <div>Current: {gitState.value}</div>
         The states
         <ul>
-          <li>no local changes</li>
-          <li>changes unstaged</li>
-          <li>changes staged for commit</li>
-          <li>committed</li>
+          <li><button onClick={() => transition('CHANGE_FILE')}>cat "Hello" > new_file.txt</button></li>
+          <li><button onClick={() => transition('UNDO_FILE_CHANGE')}>Clear change with an editor</button></li>
+          <li><button onClick={() => transition('STAGE_CHANGE')}>git add .</button></li>
+          <li><button onClick={() => transition('CHECKOUT_CHANGE')}>git checkout .</button></li>
+          <li><button onClick={() => transition('COMMIT_CHANGE')}>git commit</button></li>
+          <li><button onClick={() => transition('RESET')}>git reset .</button></li>
+          <li><button onClick={() => transition('RESET_SOFT')}>git reset HEAD~1</button></li>
+          <li><button onClick={() => transition('RESET_HARD')}>git reset --hard HEAD~1</button></li>
         </ul>
       </div>
     </div>
