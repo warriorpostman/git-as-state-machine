@@ -8,14 +8,35 @@ import SEO from "../components/seo"
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
+    <p>Welcome to the git commit state machine. Click the different git commands to demonstrate the <code>state</code> of files.
+      <code>
+        ./README.md
+      </code>
+    </p>
+    <div>
+      [no local changes] 
+      <br />
+      -> [touch file[n].txt] -> [not staged for commit]
+      <br />
+      -> [git add file[n].txt] -> [changes to commit eg. staged]
+      <br />
+      -> [git commit file[n].txt] -> [committed]
+      <br />
+
+      -> [git reset HEAD~1] -> [reset (softly) to most recent commit eg. not staged ]
+      <br />
+      -> [git reset --hard HEAD~1] -> [goes all the way back to no local changes]
+
     </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
+    <div>
+      The states
+      <ul>
+        <li>no local changes</li>
+        <li>changes unstaged</li>
+        <li>changes staged for commit</li>
+        <li>committed</li>
+      </ul>
+    </div>
   </Layout>
 )
 
