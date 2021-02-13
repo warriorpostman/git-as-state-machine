@@ -47,7 +47,6 @@ const GitMachine = () => {
 
   return (
     <div>
-      <h2>Welcome to...Machine</h2>
       <div>
         <Diagram gitState={gitState.value} />
         <div>Current: {gitState.value}</div>

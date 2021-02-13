@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Git as State Machine`,
+    title: `Welcome to the [git] Machine`,
     description: `Demonstrating Git commits as a finite state machine`,
     author: `Rustam Kasad`,
   },
