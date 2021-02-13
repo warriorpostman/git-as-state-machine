@@ -1,0 +1,17 @@
+.state-diagram {
+  display: flex;
+  width: 100%;
+}
+
+.state-diagram > div {
+  width: 100%;
+  text-align: center;
+}
+
+.state {
+  border: solid 1px gray;
+}
+
+.current-state {
+  border: solid 3px purple;
+}

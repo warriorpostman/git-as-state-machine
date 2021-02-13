@@ -1,5 +1,6 @@
 import React from "react"
 import { useMachine } from '@xstate/react'
+import Diagram from './Diagram';
 import { Machine } from 'xstate'
 
   const machine = Machine({
@@ -48,6 +49,7 @@ const GitMachine = () => {
     <div>
       <h2>Welcome to...Machine</h2>
       <div>
+        <Diagram gitState={gitState.value} />
         <div>Current: {gitState.value}</div>
         The states
         <ul>
