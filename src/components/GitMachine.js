@@ -1,53 +1,19 @@
 import React, { useState } from "react"
 import { useMachine } from '@xstate/react'
-import { Machine } from 'xstate'
 
 import Diagram from './Diagram';
 import CmdLineButton from './CmdLineButton';
 import CmdLineButtonItem from './CmdLineButtonItem';
 import Terminal from './Terminal';
+import { createGitMachine } from './GitStateMachine';
 
 import './GitMachine.css';
 
-  const machine = Machine({
-    id: 'git',
-    initial: 'no_changes',
-    states: {
-      no_changes: { 
-        on: {
-          CHANGE_FILE: 'unstaged', // eg. cat "Hello" > new_file.txt
-        } 
-      },
-      stashed: { 
-        on: {
-          STASH_APPLY: 'unstaged', // eg. git stash apply
-        } 
-      },
-      unstaged: { 
-        on: { 
-          STAGE_CHANGE: 'staged', // eg. git add .
-          CHECKOUT_CHANGE: 'no_changes', // eg. git checkout .
-          UNDO_FILE_CHANGE: 'no_changes', // eg. with an editor
-          STASH_CHANGE: 'stashed'
-        }
-      },
-      staged: { 
-        on: { 
-          COMMIT_CHANGE: 'committed', // eg. git commit
-          RESET: 'unstaged' // git reset .
-        },
-      },
-      committed: { on: { 
-          RESET_SOFT: 'unstaged', // eg. git reset HEAD~1
-          RESET_HARD: 'no_changes', // eg. git reset --hard HEAD~1
-        },
-      }
-    }
-  });
-
 const GitMachine = () => {
+  const [reset, triggerReset] = useState(false);
+  console.log('reset?', reset);
 
-  const [gitState, send] = useMachine(machine);
+  const [gitState, send] = useMachine(createGitMachine());
   const [commands, setCommands] = useState([]);
 
   const transition = (action) => { 
@@ -61,8 +27,12 @@ const GitMachine = () => {
   };
 
   const startOver = () => {
-    setCommands([]);
-    send('no_changes');
+    triggerReset(true);
+    // useMachine(createGitMachine());
+    // console.log('This is basically the real world example of "start over!!!"');
+    // const what = send('RESET_HARD');
+    //console.log('Derp ? basically the real world example of "start over!!!"', 
+    //  what, gitState.value);
   }
 
   const actions = [
@@ -114,12 +84,14 @@ const GitMachine = () => {
                   />
                 );
             })}
+          { false &&
             <li>
               <CmdLineButton 
                 onClick={() => startOver()} 
                 text="Start over!"
               />
             </li>
+          }
           </ul>
           <Terminal 
             commands={commands} 

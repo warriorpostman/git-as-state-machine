@@ -1,6 +1,7 @@
 .current-state {
   transition: outline 0.4s linear;
   outline: 3px solid purple;
+  background-color: lightyellow;
 }
 
 .state {
