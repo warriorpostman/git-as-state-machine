@@ -6,7 +6,7 @@ import './Diagram.css'
 const Diagram = ({ gitState }) => {
   const orderedStates = [
     'no_changes',
-    'stashed',
+    // 'stashed',
     'unstaged',
     'staged',
     'committed'

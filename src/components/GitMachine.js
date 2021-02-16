@@ -61,8 +61,8 @@ const GitMachine = () => {
   };
 
   const startOver = () => {
-    send('no_changes');
     setCommands([]);
+    send('no_changes');
   }
 
   const actions = [
@@ -70,12 +70,12 @@ const GitMachine = () => {
       id: 'CHANGE_FILE',
       text: "echo 'Hello' > new_file.txt"
     }, {
-      id: 'STASH_CHANGE', 
-      text: "git stash" 
-    }, {
-      id: 'STASH_APPLY', 
-      text: "git stash apply" 
-    }, {
+    //   id: 'STASH_CHANGE', 
+    //   text: "git stash" 
+    // }, {
+      // id: 'STASH_APPLY', 
+      // text: "git stash apply" 
+    // }, {
       id: 'UNDO_FILE_CHANGE', 
       text: "rm new_file.txt" 
     }, {
