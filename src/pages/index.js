@@ -1,21 +1,18 @@
 import React from "react"
-// import { Link } from "gatsby"
 import GitMachine from '../components/GitMachine';
 import State from '../components/State';
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import './index.css';
 
 const IndexPage = () => {
   
  return (
   <Layout>
     <SEO title="Home" />
-    <p>Welcome to the git commit state machine. Click the different git commands to demonstrate the <em>state</em> of a changeset in Git.
-      <code>
-        ./README.md
-      </code>
-      This state machine is predicated on the assumption that we are only represnting the state of a <em>single</em> file change. For example, <code>cat "Hello" > file.txt</code> is idempotent, as opposed to <code>cat "Hello" >> file.txt</code>, which would result in an additional change set.
+    <p>I built a finite state machine for Git using <a href="https://github.com/davidkpiano/xstate">xstate, a Javascript library for building state machines</a>. Click the different git commands (below, left) to demonstrate the <em>state</em> of a changeset in Git.
+      We are assuming some this state machine only represents the state of a <em>single</em> file change. For example, <code>cat "Hello" > file.txt</code> is idempotent and always produces a file called file.txt with the string <code>Hello</code>, as opposed to <code>cat "Hello" >> file.txt</code>, which would result in an additional change set by appending more changes to the existing file.
     </p>
 
     { false && <>
