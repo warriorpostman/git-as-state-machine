@@ -1,10 +1,12 @@
 import React from "react"
 
+import State from './State';
 import './Diagram.css'
 
 const Diagram = ({ gitState }) => {
   const orderedStates = [
     'no_changes',
+    'stashed',
     'unstaged',
     'staged',
     'committed'
@@ -12,12 +14,17 @@ const Diagram = ({ gitState }) => {
 
   return (
     <div className="state-diagram">
-      {orderedStates.map(s => 
-        <div 
-          className={gitState === s ? "current-state" : "state"}
+      {orderedStates.map((s, idx) => 
+        <React.Fragment
+            key={`state-${idx}-${s}`}
         >
-          {s}
-        </div>
+          {idx !== 0 && "< >"}
+          <State 
+            current={gitState === s}
+          >
+            {s}
+          </State>
+        </React.Fragment>
       )}
     </div>
   );

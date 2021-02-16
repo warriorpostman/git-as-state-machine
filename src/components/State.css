@@ -1,0 +1,8 @@
+.current-state {
+  transition: outline 0.4s linear;
+  outline: 3px solid purple;
+}
+
+.state {
+  border: solid 1px gray;
+}

@@ -1,0 +1,14 @@
+.command-ui {
+  margin-top: 1rem;
+  display: flex;
+}
+
+.command-ui > ul {
+  flex: 2;
+  list-style-type: none;
+  margin-left: 0rem;
+}
+
+.command-ui > div {
+  flex: 3;
+}
