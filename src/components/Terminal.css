@@ -1,6 +1,7 @@
 .terminal {
   padding: .5rem;
   font-family: Courier;
+  font-size: smaller;
   background-color: black;
   color: lightgreen;
 }

@@ -1,9 +1,17 @@
 .current-state {
   transition: outline 0.4s linear;
+  transition: margin 0.5s linear;
   outline: 3px solid purple;
   background-color: lightyellow;
+  padding: .25rem;
+  margin: .25rem;
+  text-align: center;
 }
 
 .state {
+  /* this is duplicated above */
   border: solid 1px gray;
+  padding: .25rem;
+  margin: .5rem;
+  text-align: center;
 }
