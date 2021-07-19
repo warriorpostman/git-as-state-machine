@@ -71,33 +71,31 @@ const GitMachine = () => {
 
   return (
     <div>
-      <div>
+      <div className="command-ui">
+        <ul>
+          {actions.map(action => {
+            return (
+                <CmdLineButtonItem
+                  key={action.id}
+                  onClick={() => transition(action)}
+                  displayText={action.text}
+                />
+              );
+          })}
+        { false &&
+          <li>
+            <CmdLineButton 
+              onClick={() => startOver()} 
+              text="Start over!"
+            />
+          </li>
+        }
+        </ul>
         <Diagram gitState={gitState.value} />
-        <div className="command-ui">
-          <ul>
-            {actions.map(action => {
-              return (
-                  <CmdLineButtonItem
-                    key={action.id}
-                    onClick={() => transition(action)}
-                    displayText={action.text}
-                  />
-                );
-            })}
-          { false &&
-            <li>
-              <CmdLineButton 
-                onClick={() => startOver()} 
-                text="Start over!"
-              />
-            </li>
-          }
-          </ul>
-          <Terminal 
-            commands={commands} 
-          />
-        </div>
       </div>
+      <Terminal 
+        commands={commands} 
+      />
     </div>
   );
 }

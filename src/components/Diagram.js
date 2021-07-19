@@ -1,6 +1,6 @@
 import React from "react"
 
-import State from './State';
+import { State, Transition } from './State';
 import './Diagram.css'
 
 const Diagram = ({ gitState }) => {
@@ -18,7 +18,7 @@ const Diagram = ({ gitState }) => {
         <React.Fragment
             key={`state-${idx}-${s}`}
         >
-          {idx !== 0 && "< >"}
+          {idx !== 0 && <Transition />}
           <State 
             current={gitState === s}
           >

@@ -2,7 +2,7 @@ import React from "react"
 
 import './State.css';
 
-const State = ({ children, current }) => {
+export const State = ({ children, current }) => {
   return (
     <div className={current ? "current-state" : "state"}>
       {children}
@@ -10,4 +10,8 @@ const State = ({ children, current }) => {
   );
 }
 
-export default State
+export const Transition = () => (
+  <div className="transition">⬇️</div>
+);
+
+export default State;
