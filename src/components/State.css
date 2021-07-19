@@ -8,6 +8,11 @@
   text-align: center;
 }
 
+.transition {
+  width: 100%;
+  text-align: center;
+}
+
 .state {
   /* this is duplicated above */
   border: solid 1px gray;

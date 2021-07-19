@@ -1,9 +1,8 @@
 .state-diagram {
   display: flex;
-  width: 100%;
+  flex-direction: column;
 }
 
 .state-diagram > div {
-  width: 100%;
   text-align: center;
 }

@@ -31,12 +31,12 @@ const IndexPage = () => {
       <div>
         <State current={false}>
           This
-        </State> is a <em>potential</em> state of the machine. 
+        </State> is a <em>potential</em> state. 
       </div>
       <div>
         <State current={true}>
           This
-        </State> is the <em>current</em> state of the machine.
+        </State> is the <em>current</em> state.
       </div>
     </div>
   </Layout>

@@ -10,6 +10,6 @@ This demo is built using React, GatsbyJS and xstate.
 
 Instructions to run locally:
 * `yarn`
-* `yarn start`
+* `yarn develop`
 * ...Then browse to [http://localhost:8000](http://localhost:8000)
 
