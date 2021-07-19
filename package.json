@@ -1,9 +1,9 @@
 {
   "name": "gatsby-starter-default",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Experimenting with modeling the Git staging/commit process as a state machine",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Rustam Kasad <rustamkasad@gmail.com>",
   "dependencies": {
     "@xstate/react": "^1.2.2",
     "gatsby": "^2.32.3",
@@ -31,10 +31,13 @@
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "start": "npm run develop",
+    "start": "yarn develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+  },
+  "cli": {
+    "packageManager": "yarn"
   },
   "repository": {
     "type": "git",
